@@ -2,18 +2,17 @@
 
 A simple vanilla JS integration demo for the DothanTech Printer library.
 
+## Requirements
+
+- A browser with Web Bluetooth support (Chrome, Edge, Brave)
+- A DothanTech printer (e.g. DP30S, DP30H)
+- HTTPS connection or localhost (required for Web Bluetooth)
+
 ## Quick Start
 
 The demo is fully functional when served over HTTP (Web Bluetooth requires a secure context).
 
-### Option 1: Open directly in browser
-
-```bash
-# From the project root
-open examples/html-demo/index.html
-```
-
-### Option 2: Run a local server
+### Option 1: Run a local server
 
 ```bash
 # From the project root
@@ -25,6 +24,15 @@ python3 -m http.server 8000 --directory examples/html-demo
 
 Then open: http://localhost:8000 (or the port shown)
 
+### Option 2: Open directly in browser
+
+```bash
+# From the project root
+open examples/html-demo/index.html
+```
+
+> **Note:** Opening directly via `file://` may not work in all browsers due to Web Bluetooth security requirements. Using a local server is recommended.
+
 ## Features
 
 - Connect to a Bluetooth printer
@@ -34,37 +42,45 @@ Then open: http://localhost:8000 (or the port shown)
 - Monitor printer status
 - Disconnect
 
+## Files
+
+```
+examples/html-demo/
+├── index.html                     # Main demo (local imports)
+├── index_jsdeliver_variant.html   # CDN-only variant (no local files needed)
+└── README.md
+```
+
+### Which file to use?
+
+| File | Use when... |
+|------|-------------|
+| `index.html` | Developing locally, testing changes to the library |
+| `index_jsdeliver_variant.html` | Quick demo, sharing, or testing without cloning the repo |
+
 ## Configuration
 
-The demo uses the vanilla JS integration from `vanilla/vanilla-bt-printing.js`, imported directly from CDN:
+All resources are loaded from [jsDelivr CDN](https://www.jsdelivr.com/) — no local `dist/` files needed.
+
+### Imports
 
 ```javascript
 import { setupPrinter } from 'https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.js';
 ```
 
-Styling comes from [Pico.css](https://picocss.com/docs) (CDN). UI states managed by the helper (`.status`, `.printer-info` classes) are styled via the optional `vanilla/vanilla-bt-printing.css` (also from CDN); additional refinements are inline in `index.html`.
+### Styles
 
-Full API docs: [vanilla/README.md](../vanilla/README.md)
+- **Pico.css**: [https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css](https://picocss.com/docs)
+- **Helper styles** (optional): `https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.css`
 
-## Structure
+UI states (`.status`, `.printer-info`) are managed by the helper and styled via the optional CSS file. Additional refinements are inline in `index.html`.
 
-```
-examples/html-demo/
-├── index.html              # Main demo (Pico.css + vanilla helper)
-└── canvas-editor.js        # Canvas editor (optional)
-```
+### Printer library
 
-## CDN
+The core printer library (`detonger-web-bt.min.js`) is loaded **automatically** by the integration helper. When this module is loaded from CDN, `libUrl` defaults to the jsDelivr URL — no need to specify it manually.
 
-All resources are loaded from CDN — no local `dist/` files needed.
+To override (e.g. for local development), pass `libUrl` in the `printer` config.
 
-- **Vanilla JS integration**: `https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.js`
-- **Helper styles (optional)**: `https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.css`
-- **Pico.css**: `https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css`
-- **Printer library**: loaded automatically by the integration
+## Full API Docs
 
-## Requirements
-
-- A browser with Web Bluetooth support (Chrome, Edge, Brave)
-- A DothanTech printer (e.g. DP30S, DP30H)
-- HTTPS connection or localhost (required for Web Bluetooth)
+See [vanilla/README.md](../../vanilla/README.md) for the complete integration API reference.

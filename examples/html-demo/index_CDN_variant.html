@@ -9,15 +9,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     />
-    <!-- Vanilla integration helper styles (.status/.printer-info classes managed by the helper) -->
-    <!-- CDN: <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.css" /> -->
     <link
       rel="stylesheet"
-      href="../../vanilla/vanilla-bt-printing.css"
+      href="https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.css"
     />
-    <!-- CDN: entire integration (vanilla-bt-printing + printer library) loaded from jsdelivr -->
     <style>
-      /* Minor demo refinements where Pico.css is not enough. */
       article > button {
         width: 100%;
       }
@@ -38,7 +34,6 @@
 
       <article>
         <header><strong>Connection</strong></header>
-        <!-- .status and state classes are set dynamically by vanilla-bt-printing.js -->
         <div id="dtn-print-status" class="status disconnected">Disconnected</div>
         <div id="dtn-print-printerInfo" class="printer-info"></div>
         <div role="group">
@@ -115,28 +110,20 @@ Special chars: abcdefghijklmnopqrstuvwxyz</textarea
     </main>
 
     <script type="module">
-      // Local import
-      import { setupPrinter } from '../../vanilla/vanilla-bt-printing.js';
-      // CDN: import { setupPrinter } from 'https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.js';
-      // Initialization (setupPrinter is async — it loads the printer library from CDN automatically)
+      import { setupPrinter } from 'https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.js';
+      // libUrl defaults to jsDelivr CDN automatically when loaded from CDN
       const printer = await setupPrinter({
-        // Printer options
         printer: {
-          namePrefix: "DP30S-", // Connect specifically to DP30S printer
+          namePrefix: "DP30S-",
           debug: false,
-          paperWidth: 56, // Paper width in mm (default: 56mm)
-          // Local library file
-          libUrl: new URL('../../dist/detonger-web-bt.min.js', import.meta.url).href,
-          // CDN: libUrl: 'https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/dist/detonger-web-bt.min.js',
+          paperWidth: 56,
         },
-        // UI element selectors
         selectors: {
           status: "#dtn-print-status",
           printerInfo: "#dtn-print-printerInfo",
           btnConnect: "#dtn-print-btnConnect",
           btnDisconnect: "#dtn-print-btnDisconnect",
         },
-        // Text print configuration (multiple can be added)
         textPrints: [
           {
             input: "#dtn-print-textToPrint",
@@ -146,13 +133,12 @@ Special chars: abcdefghijklmnopqrstuvwxyz</textarea
               fontFamily: "arial",
               textAlign: "left",
               padding: [1, 1, 1, 1],
-              maxWidth: 56, // Max text width in mm (default: paper width)
-              autoScale: true, // Auto-scale text to max width
-              autoWrap: false, // Auto-wrap text to new lines
+              maxWidth: 56,
+              autoScale: true,
+              autoWrap: false,
             },
           },
         ],
-        // Image print configuration from URL (multiple can be added)
         imagePrints: [
           {
             url: () => document.getElementById("dtn-print-imageUrl").value,
@@ -166,7 +152,6 @@ Special chars: abcdefghijklmnopqrstuvwxyz</textarea
             },
           },
         ],
-        // Canvas print configuration (multiple can be added)
         canvasPrints: [
           {
             canvas: "#dtn-print-canvas",
