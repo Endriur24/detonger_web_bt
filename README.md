@@ -5,6 +5,10 @@
 
 JavaScript/TypeScript library for DothanTech/LPAPI-BLE thermal printers via Web Bluetooth API, with optional React integration.
 
+## Live Demo
+
+[Live Demo](https://detonger-web-bt-example.pages.dev)
+
 ## Tested with 
 
 - DP30S
