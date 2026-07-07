@@ -137,7 +137,7 @@ PaperType.Transparent // Transparent film
 
 | Option | Type | Default |
 |--------|------|---------|
-| `paperWidth` | `number` | `56` (pixels) |
+| `paperWidth` | `number` | `56` (mm) |
 | `debug` | `boolean` | `false` |
 | `namePrefix` | `string` | `'DP'` |
 | `mtu` | `number` | `512` |
