@@ -22,7 +22,6 @@ export interface PrinterContextValue {
   deviceName: string | null;
   printerStatus: PrinterStatus | null;
   printerStats: PrinterPrintStats | null;
-  isStatusLoading: boolean;
   connect: () => Promise<void>;
   disconnect: () => Promise<void>;
   refreshStatus: (options?: { full?: boolean }) => Promise<void>;

@@ -1,6 +1,6 @@
 export { PrinterProvider, PrinterContext } from './PrinterProvider';
 export { usePrinter } from './usePrinter';
-export { usePrinterStatus, usePrinterStatusQuery } from './usePrinterStatus';
+export { usePrinterStatus } from './usePrinterStatus';
 export { usePrinterConnection } from './usePrinterConnection';
 export type { PrinterContextValue, PrinterProviderProps, } from './types';
 export type { UsePrinterConnectionReturn } from './usePrinterConnection';

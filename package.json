@@ -1,6 +1,6 @@
 {
   "name": "detonger-web-bt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Independently developed library for connecting to DothanTech Bluetooth printers using Web Bluetooth API.",
   "type": "module",
   "license": "MIT",

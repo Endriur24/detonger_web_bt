@@ -111,4 +111,3 @@ export type ConnectionStatus = typeof ConnectionStatus[keyof typeof ConnectionSt
 export type StatusChangeCallback = (status: ConnectionStatus) => void;
 export type DataReceivedCallback = (data: Uint8Array) => void;
 export type ErrorCallback = (error: Error) => void;
-export type ProgressCallback = (progress: number) => void;

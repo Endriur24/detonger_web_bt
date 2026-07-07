@@ -4,7 +4,7 @@
  * Primary class for communicating with DothanTech printers.
  *
  * @author Reverse-engineered from com.dothantech Android library
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 import type {
@@ -344,11 +344,6 @@ export class DothanTechPrinter {
     await this.bluetoothManager.sendData(data);
   }
 }
-
-/**
- * Singleton printer instance for convenience.
- */
-export const printer = new DothanTechPrinter();
 
 export type {
   PrinterConfig,

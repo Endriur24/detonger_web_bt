@@ -107,7 +107,6 @@ export function PrinterProvider({
     deviceName,
     printerStatus,
     printerStats,
-    isStatusLoading: false,
     connect,
     disconnect,
     refreshStatus,

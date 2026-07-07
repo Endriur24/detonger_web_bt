@@ -34,8 +34,3 @@ export declare const DEFAULT_CONFIG: {
     readonly paperWidth: 56;
 };
 export declare const OPTIONAL_SERVICES: string[];
-export declare const KNOWN_SERVICE_CHAR_PAIRS: {
-    service: string;
-    write: string;
-    notify: string;
-}[];

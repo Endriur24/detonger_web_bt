@@ -1197,10 +1197,6 @@ DothanTechPrinter.ConnectionStatus = {
     ERROR: 'error',
 };
 DothanTechPrinter.PaperTypeNames = PaperTypeNames;
-/**
- * Singleton printer instance for convenience.
- */
-new DothanTechPrinter();
 
 const PrinterContext = createContext(null);
 /**
@@ -1284,7 +1280,6 @@ function PrinterProvider({ children, config, autoConnect = false, autoDisconnect
         deviceName,
         printerStatus,
         printerStats,
-        isStatusLoading: false,
         connect,
         disconnect,
         refreshStatus,
@@ -1373,12 +1368,6 @@ function usePrinterStatus(options) {
         refresh,
     };
 }
-/**
- * Alias for usePrinterStatus - compatible with TanStack Query naming convention.
- */
-function usePrinterStatusQuery(options) {
-    return usePrinterStatus(options);
-}
 
 /**
  * Helper hook for managing printer connection with loading and error states.
@@ -1426,5 +1415,5 @@ function usePrinterConnection() {
     };
 }
 
-export { PrinterContext, PrinterProvider, usePrinter, usePrinterConnection, usePrinterStatus, usePrinterStatusQuery };
+export { PrinterContext, PrinterProvider, usePrinter, usePrinterConnection, usePrinterStatus };
 //# sourceMappingURL=index.js.map

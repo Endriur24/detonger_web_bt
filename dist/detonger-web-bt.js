@@ -1200,10 +1200,6 @@ DothanTechPrinter.ConnectionStatus = {
     ERROR: 'error',
 };
 DothanTechPrinter.PaperTypeNames = PaperTypeNames;
-/**
- * Singleton printer instance for convenience.
- */
-const printer = new DothanTechPrinter();
 
-export { ConnectionStatus, DothanTechPrinter, PaperType, PaperTypeNames, printer };
+export { ConnectionStatus, DothanTechPrinter, PaperType, PaperTypeNames };
 //# sourceMappingURL=detonger-web-bt.js.map

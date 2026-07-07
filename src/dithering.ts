@@ -13,13 +13,6 @@ export interface ImageDataLike {
   height: number;
 }
 
-export interface RgbaColor {
-  r: number;
-  g: number;
-  b: number;
-  a: number;
-}
-
 /**
  * Convert image to grayscale using luminance weights (R*0.21 + G*0.71 + B*0.07).
  */
@@ -27,18 +20,6 @@ export function greyscaleLuminance(image: ImageDataLike): ImageDataLike {
   const { data } = image;
   for (let i = 0; i <= data.length; i += 4) {
     const gray = Math.floor(data[i] * 0.21 + data[i + 1] * 0.71 + data[i + 2] * 0.07);
-    data[i] = data[i + 1] = data[i + 2] = gray;
-  }
-  return image;
-}
-
-/**
- * Convert image to grayscale using average of RGB channels.
- */
-export function greyscaleAverage(image: ImageDataLike): ImageDataLike {
-  const { data } = image;
-  for (let i = 0; i <= data.length; i += 4) {
-    const gray = Math.floor((data[i] + data[i + 1] + data[i + 2]) / 3);
     data[i] = data[i + 1] = data[i + 2] = gray;
   }
   return image;
@@ -95,30 +76,6 @@ export function ditherThreshold(image: ImageDataLike, thresholdValue = 128): Ima
     data[i] = isBlack ? 255 : 0;
     data[i + 1] = isBlack ? 255 : 0;
     data[i + 2] = isBlack ? 255 : 0;
-  }
-  return image;
-}
-
-/**
- * Replace colors with black and white based on brightness.
- * @param image - Image data.
- * @param black - Replacement color for dark pixels.
- * @param white - Replacement color for light pixels.
- */
-export function replaceColours(
-  image: ImageDataLike,
-  black: RgbaColor,
-  white: RgbaColor
-): ImageDataLike {
-  const { data } = image;
-  for (let i = 0; i <= data.length; i += 4) {
-    const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-    const isBlack = avg < 127;
-    const color = isBlack ? black : white;
-    data[i] = color.r;
-    data[i + 1] = color.g;
-    data[i + 2] = color.b;
-    data[i + 3] = color.a;
   }
   return image;
 }

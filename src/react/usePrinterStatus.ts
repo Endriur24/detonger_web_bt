@@ -62,10 +62,3 @@ export function usePrinterStatus(options?: UsePrinterStatusOptions): UsePrinterS
     refresh,
   };
 }
-
-/**
- * Alias for usePrinterStatus - compatible with TanStack Query naming convention.
- */
-export function usePrinterStatusQuery(options?: UsePrinterStatusOptions) {
-  return usePrinterStatus(options);
-}

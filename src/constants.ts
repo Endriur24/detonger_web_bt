@@ -56,7 +56,3 @@ export const OPTIONAL_SERVICES = [
   '49535343-fe7d-4ae5-8fa9-9fafd205e45a',
   '49535343-8841-43f4-a8d4-ecbe34729bb3',
 ];
-
-export const KNOWN_SERVICE_CHAR_PAIRS = [
-  { service: '0000ffe0-0000-1000-8000-00805f9b34fb', write: '0000ffe2-0000-1000-8000-00805f9b34fb', notify: '0000ffe1-0000-1000-8000-00805f9b34fb' },
-];

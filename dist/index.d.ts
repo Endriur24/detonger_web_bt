@@ -136,9 +136,5 @@ export declare class DothanTechPrinter {
     private createCanvasFromSource;
     private sendData;
 }
-/**
- * Singleton printer instance for convenience.
- */
-export declare const printer: DothanTechPrinter;
 export type { PrinterConfig, TextPrintOptions, ImagePrintOptions, PrintStats, PrinterStatus, PrinterPrintStats, DataReceivedCallback, ErrorCallback, StatusChangeCallback, };
 export { PaperType, PaperTypeNames, ConnectionStatus, };

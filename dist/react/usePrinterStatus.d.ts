@@ -13,7 +13,3 @@ export interface UsePrinterStatusReturn {
  * Hook for monitoring printer status with optional polling.
  */
 export declare function usePrinterStatus(options?: UsePrinterStatusOptions): UsePrinterStatusReturn;
-/**
- * Alias for usePrinterStatus - compatible with TanStack Query naming convention.
- */
-export declare function usePrinterStatusQuery(options?: UsePrinterStatusOptions): UsePrinterStatusReturn;
