@@ -1,10 +1,11 @@
 /**
- * DothanTech Printer Library - Main Entry Point
+ * Detonger web bluetooth - Main Entry Point
  *
- * Primary class for communicating with DothanTech printers.
+ * Unofficial library for communicating with DothanTech printers.
  *
- * @author Reverse-engineered from com.dothantech Android library
- * @version 1.0.1
+ * @author Endriur24
+ * @version 1.0.2
+ * @license MIT
  */
 import type { PrinterConfig, TextPrintOptions, ImagePrintOptions, PrintStats, PrinterStatus, PrinterPrintStats, DataReceivedCallback, ErrorCallback, StatusChangeCallback } from './types';
 import { ConnectionStatus, PaperType } from './types';
@@ -68,12 +69,12 @@ export declare class DothanTechPrinter {
      */
     getPrintingStats(): PrinterPrintStats;
     /**
-     * Set paper width in pixels.
-     * @param width - Width in pixels (must be >= 1).
+     * Set paper width in mm.
+     * @param width - Width in mm (must be >= 1).
      */
     setPaperWidth(width: number): void;
     /**
-     * Get the current paper width in pixels.
+     * Get the current paper width in mm.
      */
     getPaperWidth(): number;
     /**

@@ -515,10 +515,10 @@ async function canvasToDothanTech(canvas, options = {}, debug = false) {
  * @param text - The text to render.
  * @param options - Text formatting options.
  * @param printerDPI - Printer DPI for pixel-to-mm conversion.
- * @param paperWidthPx - Paper width in pixels.
+ * @param paperWidthMm - Paper width in mm (fallback when maxWidth is not set in options).
  * @returns A canvas element with the rendered text.
  */
-function renderTextToCanvas(text, options = {}, printerDPI = 203, paperWidthPx = 58) {
+function renderTextToCanvas(text, options = {}, printerDPI = 203, paperWidthMm = 58) {
     const { fontSize = 24, fontFamily = 'Arial', fontWeight = 'normal', fontStyle = 'normal', textAlign = 'left', lineHeight = 1.2, padding = [2, 2, 2, 2], maxWidth, autoScale = false, minScale = 0.3, autoWrap = false, } = options;
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -529,7 +529,7 @@ function renderTextToCanvas(text, options = {}, printerDPI = 203, paperWidthPx =
     const padRight = padRightMM * pxPerMm;
     const padBottom = padBottomMM * pxPerMm;
     const padLeft = padLeftMM * pxPerMm;
-    const effectiveMaxWidthPx = (maxWidth ?? paperWidthPx) * pxPerMm;
+    const effectiveMaxWidthPx = (maxWidth ?? paperWidthMm) * pxPerMm;
     const maxContentWidthPx = effectiveMaxWidthPx - (padLeft + padRight);
     const wrapText = (lines, maxWidth, font) => {
         ctx.font = font;
@@ -663,15 +663,15 @@ function renderTextToCanvas(text, options = {}, printerDPI = 203, paperWidthPx =
 /**
  * Scale a canvas to a maximum width specified in millimeters.
  * @param canvas - The source canvas.
- * @param maxWidthMm - Maximum width in mm. If undefined, returns the canvas unchanged.
+ * @param maxWidthMm - Maximum width in mm. If undefined, falls back to paperWidthMm.
  * @param printerDPI - Printer DPI for conversion.
- * @param paperWidthPx - Paper width in pixels (fallback).
+ * @param paperWidthMm - Paper width in mm (fallback when maxWidthMm is not set).
  * @returns The original or a scaled canvas.
  */
-function scaleCanvasByMaxWidth(canvas, maxWidthMm, printerDPI, paperWidthPx) {
+function scaleCanvasByMaxWidth(canvas, maxWidthMm, printerDPI, paperWidthMm) {
     const dpi = printerDPI;
     const pxPerMm = dpi / 25.4;
-    const effectiveMaxWidthPx = (maxWidthMm ?? paperWidthPx) * pxPerMm;
+    const effectiveMaxWidthPx = (maxWidthMm ?? paperWidthMm) * pxPerMm;
     if (canvas.width <= effectiveMaxWidthPx) {
         return canvas;
     }
@@ -928,12 +928,13 @@ function parseStatusResponse(data, printerStatus, printingStats, debugLog) {
 }
 
 /**
- * DothanTech Printer Library - Main Entry Point
+ * Detonger web bluetooth - Main Entry Point
  *
- * Primary class for communicating with DothanTech printers.
+ * Unofficial library for communicating with DothanTech printers.
  *
- * @author Reverse-engineered from com.dothantech Android library
- * @version 1.0.1
+ * @author Endriur24
+ * @version 1.0.2
+ * @license MIT
  */
 /**
  * Main class for communicating with a DothanTech printer via Web Bluetooth.
@@ -1020,8 +1021,8 @@ class DothanTechPrinter {
         return { ...this.printingStats };
     }
     /**
-     * Set paper width in pixels.
-     * @param width - Width in pixels (must be >= 1).
+     * Set paper width in mm.
+     * @param width - Width in mm (must be >= 1).
      */
     setPaperWidth(width) {
         if (width < 1)
@@ -1029,7 +1030,7 @@ class DothanTechPrinter {
         this.config.paperWidth = width;
     }
     /**
-     * Get the current paper width in pixels.
+     * Get the current paper width in mm.
      */
     getPaperWidth() {
         return this.config.paperWidth;

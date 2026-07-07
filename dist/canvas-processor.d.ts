@@ -21,19 +21,19 @@ export declare function canvasToDothanTech(canvas: HTMLCanvasElement, options?: 
  * @param text - The text to render.
  * @param options - Text formatting options.
  * @param printerDPI - Printer DPI for pixel-to-mm conversion.
- * @param paperWidthPx - Paper width in pixels.
+ * @param paperWidthMm - Paper width in mm (fallback when maxWidth is not set in options).
  * @returns A canvas element with the rendered text.
  */
-export declare function renderTextToCanvas(text: string, options?: TextPrintOptions, printerDPI?: number, paperWidthPx?: number): HTMLCanvasElement;
+export declare function renderTextToCanvas(text: string, options?: TextPrintOptions, printerDPI?: number, paperWidthMm?: number): HTMLCanvasElement;
 /**
  * Scale a canvas to a maximum width specified in millimeters.
  * @param canvas - The source canvas.
- * @param maxWidthMm - Maximum width in mm. If undefined, returns the canvas unchanged.
+ * @param maxWidthMm - Maximum width in mm. If undefined, falls back to paperWidthMm.
  * @param printerDPI - Printer DPI for conversion.
- * @param paperWidthPx - Paper width in pixels (fallback).
+ * @param paperWidthMm - Paper width in mm (fallback when maxWidthMm is not set).
  * @returns The original or a scaled canvas.
  */
-export declare function scaleCanvasByMaxWidth(canvas: HTMLCanvasElement, maxWidthMm: number | undefined, printerDPI: number, paperWidthPx: number): HTMLCanvasElement;
+export declare function scaleCanvasByMaxWidth(canvas: HTMLCanvasElement, maxWidthMm: number | undefined, printerDPI: number, paperWidthMm: number): HTMLCanvasElement;
 /**
  * Load an image from a URL into a canvas element.
  * @param imageUrl - The URL of the image to load.
