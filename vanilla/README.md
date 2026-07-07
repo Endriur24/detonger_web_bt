@@ -106,7 +106,7 @@ await setupPrinter({ DothanTechPrinter, ... });
 printer: {
     namePrefix: "DP30S-", // Bluetooth device name prefix (default: "DP")
     debug: true,        // Enable console logging (default: false)
-    paperWidth: 56,     // Paper width in pixels (default: 56)
+    paperWidth: 56,     // Paper width in mm (default: 56)
 }
 ```
 

@@ -60,22 +60,24 @@ examples/html-demo/
 
 ## Configuration
 
-All resources are loaded from [jsDelivr CDN](https://www.jsdelivr.com/) — no local `dist/` files needed.
+### `index.html` (local development)
 
-### Imports
+Uses local imports from `../../dist/` and `../../vanilla/`. Requires building the library first (`npm run build` from the project root).
+
+### `index_jsdeliver_variant.html` (CDN-only)
+
+All resources loaded from [jsDelivr CDN](https://www.jsdelivr.com/) — no local `dist/` files needed.
 
 ```javascript
 import { setupPrinter } from 'https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.js';
 ```
 
-### Styles
+Styles:
 
 - **Pico.css**: [https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css](https://picocss.com/docs)
 - **Helper styles** (optional): `https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.css`
 
-UI states (`.status`, `.printer-info`) are managed by the helper and styled via the optional CSS file. Additional refinements are inline in `index.html`.
-
-### Printer library
+UI states (`.status`, `.printer-info`) are managed by the helper and styled via the optional CSS file.
 
 The core printer library (`detonger-web-bt.min.js`) is loaded **automatically** by the integration helper. When this module is loaded from CDN, `libUrl` defaults to the jsDelivr URL — no need to specify it manually.
 

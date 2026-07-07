@@ -4,15 +4,13 @@ React + TypeScript + Vite demo for the `detonger-web-bt` library with Web Blueto
 
 ## Quick Start
 
-### Run with HTTPS (required for Web Bluetooth)
-
 ```bash
-HTTPS=true npm run dev
+npm run dev
 ```
 
-Open: https://localhost:5173
+Open: http://localhost:5173
 
-**Note:** HTTP (`npm run dev`) works for UI preview only. Web Bluetooth requires HTTPS.
+Web Bluetooth works on `http://localhost` — browsers treat localhost as a secure context.
 
 ### Alternative: Use ngrok
 
@@ -54,11 +52,11 @@ function MyComponent() {
 
 ## Troubleshooting
 
-**"Navigator.bluetooth is undefined"** - Use HTTPS.
+**"Navigator.bluetooth is undefined"** — Web Bluetooth is only supported in Chrome, Edge, and Opera. Not available in Firefox or Safari. If accessing from a non-localhost address (e.g. phone on local network), HTTPS is required.
 
-**"No compatible devices found"** - Enable Bluetooth, turn on printer, ensure pairing mode.
+**"No compatible devices found"** — Enable Bluetooth, turn on printer, ensure pairing mode.
 
 ## More
 
-- [Main documentation](../README.md)
+- [Main documentation](../../README.md)
 - [Web Bluetooth API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API)
