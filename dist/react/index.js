@@ -930,7 +930,7 @@ function parseStatusResponse(data, printerStatus, printingStats, debugLog) {
  * Primary class for communicating with DothanTech printers.
  *
  * @author Reverse-engineered from com.dothantech Android library
- * @version 1.0.0
+ * @version 1.0.1
  */
 /**
  * Main class for communicating with a DothanTech printer via Web Bluetooth.
