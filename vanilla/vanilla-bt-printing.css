@@ -1,0 +1,76 @@
+/*
+ * DothanTech Printer — style pomocnicze integracji Vanilla JS (opcjonalne).
+ *
+ * Stylizacja elementów UI zarządzanych dynamicznie przez vanilla-bt-printing.js:
+ *   - `.status` + stany: disconnected / connecting / connected / printing / error
+ *     (helper ustawia: statusEl.className = 'status ' + status)
+ *   - `.printer-info` + `.printer-info.show`
+ *     (helper przełącza klasę .show)
+ *
+ * Plik jest opcjonalny i framework-agnostic (nie wymaga Pico ani innego CSS).
+ * Możesz go pominąć i ostylować te klasy we własnym CSS, albo zmienić kolory
+ * przez poniższe zmienne CSS.
+ */
+
+:root {
+  --dtn-radius: 0.375rem;
+  --dtn-spacing: 0.75rem 1rem;
+
+  --dtn-disconnected-bg: #fee2e2;
+  --dtn-disconnected-fg: #991b1b;
+  --dtn-connecting-bg: #fef3c7;
+  --dtn-connecting-fg: #92400e;
+  --dtn-connected-bg: #d1fae5;
+  --dtn-connected-fg: #065f46;
+  --dtn-printing-bg: #dbeafe;
+  --dtn-printing-fg: #1e40af;
+  --dtn-error-bg: #fee2e2;
+  --dtn-error-fg: #991b1b;
+
+  --dtn-info-bg: #e0e7ff;
+  --dtn-info-fg: #1e40af;
+}
+
+/* Status połączenia — stany ustawiane przez helper */
+.status {
+  display: block;
+  padding: var(--dtn-spacing);
+  border-radius: var(--dtn-radius);
+  margin-bottom: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+.status.disconnected {
+  background: var(--dtn-disconnected-bg);
+  color: var(--dtn-disconnected-fg);
+}
+.status.connecting {
+  background: var(--dtn-connecting-bg);
+  color: var(--dtn-connecting-fg);
+}
+.status.connected {
+  background: var(--dtn-connected-bg);
+  color: var(--dtn-connected-fg);
+}
+.status.printing {
+  background: var(--dtn-printing-bg);
+  color: var(--dtn-printing-fg);
+}
+.status.error {
+  background: var(--dtn-error-bg);
+  color: var(--dtn-error-fg);
+}
+
+/* Informacje o drukarce — pokazywane/ukrywane przez helper (.show) */
+.printer-info {
+  background: var(--dtn-info-bg);
+  color: var(--dtn-info-fg);
+  padding: var(--dtn-spacing);
+  border-radius: var(--dtn-radius);
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  display: none;
+}
+.printer-info.show {
+  display: block;
+}

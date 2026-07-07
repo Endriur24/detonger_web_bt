@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "esnext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "outDir": "./dist/esm",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "resolveJsonModule": true,
+    "removeComments": false,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "detonger-web-bt": ["./src/index.ts"],
+      "detonger-web-bt/react": ["./src/react/index.ts"]
+    },
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "examples",
+    "decompiled-android-lib"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "name": "detonger-web-bt",
+  "version": "1.0.0",
+  "description": "Independently developed library for connecting to DothanTech Bluetooth printers using Web Bluetooth API.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Andrzej Rusinowski <andrzejrusinowski@gmail.com>",
+  "homepage": "https://github.com/Endriur24/detonger_web_bt#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Endriur24/detonger_web_bt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Endriur24/detonger_web_bt/issues"
+  },
+  "keywords": [
+    "bluetooth",
+    "web-bluetooth",
+    "printer",
+    "thermal-printer",
+    "receipt-printer",
+    "label-printer",
+    "dothantech",
+    "lpapi",
+    "react",
+    "typescript"
+  ],
+  "main": "dist/detonger-web-bt.js",
+  "module": "dist/detonger-web-bt.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist/detonger-web-bt.js",
+    "dist/detonger-web-bt.min.js",
+    "dist/*.d.ts",
+    "dist/*.js.map",
+    "dist/react",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/detonger-web-bt.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react/index.js",
+      "types": "./dist/react/index.d.ts"
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc && rollup -c && npm run minify",
+    "minify": "terser dist/detonger-web-bt.js -o dist/detonger-web-bt.min.js -c -m --source-map",
+    "prepublishOnly": "npm run build",
+    "watch": "tsc --watch"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.0",
+    "@types/web-bluetooth": "^0.0.21",
+    "react": "^18.2.0",
+    "rollup": "^4.9.1",
+    "terser": "^5.26.0",
+    "typescript": "^5.3.0"
+  }
+}

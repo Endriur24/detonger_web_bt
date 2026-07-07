@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>DothanTech Printer Demo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <!-- Vanilla integration helper styles (.status/.printer-info classes managed by the helper) -->
+    <!-- CDN: <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.css" /> -->
+    <link
+      rel="stylesheet"
+      href="../../vanilla/vanilla-bt-printing.css"
+    />
+    <!-- CDN: entire integration (vanilla-bt-printing + printer library) loaded from jsdelivr -->
+    <style>
+      /* Minor demo refinements where Pico.css is not enough. */
+      article > button {
+        width: 100%;
+      }
+      canvas {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+        border: 1px solid var(--pico-muted-border-color);
+        border-radius: var(--pico-border-radius);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>DothanTech Printer Demo</h1>
+      <p><small>Minimal demonstration</small></p>
+
+      <article>
+        <header><strong>Connection</strong></header>
+        <!-- .status and state classes are set dynamically by vanilla-bt-printing.js -->
+        <div id="dtn-print-status" class="status disconnected">Disconnected</div>
+        <div id="dtn-print-printerInfo" class="printer-info"></div>
+        <div role="group">
+          <button id="dtn-print-btnConnect">Connect to Printer</button>
+          <button id="dtn-print-btnDisconnect" class="secondary" disabled>
+            Disconnect
+          </button>
+        </div>
+      </article>
+
+      <article>
+        <h2>Print Text</h2>
+        <textarea
+          id="dtn-print-textToPrint"
+          placeholder="Enter text to print..."
+        >
+Hello World!
+
+This is a demo of the
+DothanTech Printer library.
+
+Special chars: abcdefghijklmnopqrstuvwxyz</textarea
+        >
+        <button id="dtn-print-btnPrint" disabled>Print Text</button>
+      </article>
+
+      <article>
+        <h2>Print from Canvas</h2>
+        <canvas id="dtn-print-canvas" width="384" height="200"></canvas>
+        <button id="dtn-print-btnPrintCanvas" disabled>Print Canvas</button>
+      </article>
+
+      <article>
+        <h2>Print Image from URL</h2>
+        <label for="dtn-print-imageUrl">
+          Image URL
+          <input
+            type="url"
+            id="dtn-print-imageUrl"
+            placeholder="https://..."
+            value="https://upload.wikimedia.org/wikipedia/commons/c/c0/Nicolas_Cage_Deauville_2013.jpg"
+          />
+        </label>
+        <button id="dtn-print-btnPrintImage" disabled>
+          Print Image from URL
+        </button>
+      </article>
+
+      <script>
+        function initCanvas() {
+          const canvas = document.getElementById("dtn-print-canvas");
+          if (!canvas) return;
+
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "white";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.fillStyle = "black";
+          ctx.font = "24px Arial";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("Canvas Test!", canvas.width / 2, canvas.height / 2);
+
+          ctx.font = "16px Arial";
+          ctx.fillText(
+            "Edit canvas in a separate file",
+            canvas.width / 2,
+            canvas.height / 2 + 30,
+          );
+        }
+
+        initCanvas();
+      </script>
+    </main>
+
+    <script type="module">
+      // Local import
+      import { setupPrinter } from '../../vanilla/vanilla-bt-printing.js';
+      // CDN: import { setupPrinter } from 'https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/vanilla/vanilla-bt-printing.js';
+      // Initialization (setupPrinter is async — it loads the printer library from CDN automatically)
+      const printer = await setupPrinter({
+        // Printer options
+        printer: {
+          namePrefix: "DP30S-", // Connect specifically to DP30S printer
+          debug: false,
+          paperWidth: 56, // Paper width in pixels
+          // Local library file
+          libUrl: new URL('../../dist/detonger-web-bt.min.js', import.meta.url).href,
+          // CDN: libUrl: 'https://cdn.jsdelivr.net/gh/Endriur24/detonger_web_bt@main/dist/detonger-web-bt.min.js',
+        },
+        // UI element selectors
+        selectors: {
+          status: "#dtn-print-status",
+          printerInfo: "#dtn-print-printerInfo",
+          btnConnect: "#dtn-print-btnConnect",
+          btnDisconnect: "#dtn-print-btnDisconnect",
+        },
+        // Text print configuration (multiple can be added)
+        textPrints: [
+          {
+            input: "#dtn-print-textToPrint",
+            button: "#dtn-print-btnPrint",
+            options: {
+              fontSize: 24,
+              fontFamily: "arial",
+              textAlign: "left",
+              padding: [1, 1, 1, 1],
+              maxWidth: 56, // Max text width in mm (default: paper width)
+              autoScale: true, // Auto-scale text to max width
+              autoWrap: false, // Auto-wrap text to new lines
+            },
+          },
+        ],
+        // Image print configuration from URL (multiple can be added)
+        imagePrints: [
+          {
+            url: () => document.getElementById("dtn-print-imageUrl").value,
+            button: "#dtn-print-btnPrintImage",
+            options: {
+              threshold: 192,
+              invertColors: false,
+              scale: 1.0,
+              autoCrop: true,
+              ditherMethod: "atkinson",
+            },
+          },
+        ],
+        // Canvas print configuration (multiple can be added)
+        canvasPrints: [
+          {
+            canvas: "#dtn-print-canvas",
+            button: "#dtn-print-btnPrintCanvas",
+            options: {
+              threshold: 192,
+              invertColors: false,
+              scale: 1.0,
+              autoCrop: true,
+            },
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>
