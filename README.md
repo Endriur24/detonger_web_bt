@@ -3,6 +3,10 @@
 
 # DETONGER WEB BT
 
+[![npm version](https://img.shields.io/npm/v/detonger-web-bt)](https://www.npmjs.com/package/detonger-web-bt)
+[![license](https://img.shields.io/npm/l/detonger-web-bt)](https://github.com/Endriur24/detonger_web_bt/blob/main/LICENSE)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/detonger-web-bt)](https://bundlephobia.com/package/detonger-web-bt)
+
 JavaScript/TypeScript library for DothanTech/LPAPI-BLE thermal printers via Web Bluetooth API, with optional React integration.
 
 ## Live Demo
@@ -80,9 +84,6 @@ function PrintButton() {
 | `mtu` | `number` | `512` | Max packet MTU size |
 | `packetDelay` | `number` | `10` | Delay between packets (ms) |
 | `debug` | `boolean` | `false` | Enable verbose console logging |
-| `serviceUUID` | `string` | `'0000ff00-...'` | Bluetooth service UUID |
-| `writeUUID` | `string` | `'0000ff02-...'` | Write characteristic UUID |
-| `notifyUUID` | `string` | `'0000ff01-...'` | Notify characteristic UUID |
 
 ### Connection
 
@@ -185,6 +186,13 @@ Returned by `getPrinterStatus()`.
 | `currentSpeed` | `number` | Print speed |
 | `currentSpeedLevel` | `number` | Speed level |
 | `currentPaperType` | `PaperType` | Current paper type |
+| `deviceType` | `number` | Device type identifier |
+| `seriesName` | `string` | Printer series name |
+| `devIntName` | `string` | Internal device name |
+| `printerStatus` | `number` | Printer status code |
+| `printerLocateArea` | `number` | Printer locate area |
+| `darknessCount` | `number` | Darkness count |
+| `speedCount` | `number` | Speed count |
 
 ### `PrinterPrintStats`
 
@@ -296,8 +304,33 @@ const {
 ## Troubleshooting
 
 - **Won't connect**: Requires Chrome or Edge (Web Bluetooth API). Printer must be on and in pairing mode.
+- **HTTPS required**: Web Bluetooth requires a secure context. Use `https://` or `localhost` — it won't work on `http://192.168.x.x` or other non-localhost HTTP origins.
 - **"usePrinter must be used within a PrinterProvider"**: Hook must be inside `<PrinterProvider>`.
 - **Printing fails**: Check `isConnected` is `true`. Enable `debug: true` in config for console logs.
+
+## Browser Support
+
+Web Bluetooth API is supported in:
+- **Desktop**: Chrome, Edge, Opera
+- **Android**: Chrome, Edge, Opera
+- **Not supported**: Firefox, Safari, iOS (all browsers)
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Build the library
+npm run build
+
+# Watch mode for development
+npm run watch
+
+# Run examples
+cd examples/html-demo && npx serve
+cd examples/vite-react-demo && npm install && npm run dev
+```
 
 ## License
 
