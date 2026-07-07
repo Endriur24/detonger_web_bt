@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detonger Minimal Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+    </style>
+</head>
+<body>
+    <h2>Detonger Web BT - Minimal Demo</h2>
+    
+    <button id="connect">Connect to Printer</button>
+    <button id="print" disabled>Print "Hello World"</button>
+    <div id="status">---</div>
+
+    <script type="module">
+        let printer = null;
+
+        const status = document.getElementById('status');
+        const connectBtn = document.getElementById('connect');
+        const printBtn = document.getElementById('print');
+
+        async function loadPrinter() {
+            const m = await import('https://cdn.jsdelivr.net/npm/detonger-web-bt@1.0.1/dist/detonger-web-bt.min.js');
+            return m.DothanTechPrinter;
+        }
+
+        connectBtn.onclick = async () => {
+            if (printer?.isConnected()) {
+                await printer.disconnect();
+                status.textContent = "Disconnected";
+                printBtn.disabled = true;
+                connectBtn.textContent = "Connect to Printer";
+                return;
+            }
+
+            try {
+                status.textContent = "Connecting...";
+                connectBtn.disabled = true;
+
+                const Printer = await loadPrinter();
+                printer = new Printer({debug: true });
+
+                await printer.connect();
+
+                status.textContent = "✅ Connected";
+                printBtn.disabled = false;
+                connectBtn.textContent = "Disconnect";
+                connectBtn.disabled = false;
+            } catch (e) {
+                status.textContent = "Error: " + e.message;
+                connectBtn.disabled = false;
+            }
+        };
+
+        printBtn.onclick = async () => {
+            try {
+                printBtn.disabled = true;
+                status.textContent = "Printing...";
+                await printer.printText("Hello World!", {fontSize: 32, textAlign: "center"});
+                status.textContent = "✅ Printed successfully";
+            } catch (e) {
+                status.textContent = "Print error";
+            } finally {
+                printBtn.disabled = false;
+            }
+        };
+    </script>
+</body>
+</html>
