@@ -17,7 +17,7 @@ export interface PrinterConfig {
   packetDelay?: number;
   /** Debug mode - enables verbose console logging */
   debug?: boolean;
-  /** Paper width in pixels (fallback for maxWidth in TextPrintOptions) */
+  /** Paper width in mm (fallback for maxWidth in TextPrintOptions and ImagePrintOptions) */
   paperWidth?: number;
 }
 

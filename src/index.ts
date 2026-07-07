@@ -156,8 +156,8 @@ export class DothanTechPrinter {
   }
 
   /**
-   * Set paper width in pixels.
-   * @param width - Width in pixels (must be >= 1).
+   * Set paper width in mm.
+   * @param width - Width in mm (must be >= 1).
    */
   setPaperWidth(width: number): void {
     if (width < 1) throw new Error('Paper width must be >= 1');
@@ -165,7 +165,7 @@ export class DothanTechPrinter {
   }
 
   /**
-   * Get the current paper width in pixels.
+   * Get the current paper width in mm.
    */
   getPaperWidth(): number {
     return this.config.paperWidth;

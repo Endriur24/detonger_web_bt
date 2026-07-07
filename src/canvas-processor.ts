@@ -138,14 +138,14 @@ export async function canvasToDothanTech(
  * @param text - The text to render.
  * @param options - Text formatting options.
  * @param printerDPI - Printer DPI for pixel-to-mm conversion.
- * @param paperWidthPx - Paper width in pixels.
+ * @param paperWidthMm - Paper width in mm (fallback when maxWidth is not set in options).
  * @returns A canvas element with the rendered text.
  */
 export function renderTextToCanvas(
   text: string,
   options: TextPrintOptions = {},
   printerDPI: number = 203,
-  paperWidthPx: number = 58
+  paperWidthMm: number = 58
 ): HTMLCanvasElement {
   const {
     fontSize    = 24,
@@ -173,7 +173,7 @@ export function renderTextToCanvas(
   const padBottom = padBottomMM * pxPerMm;
   const padLeft   = padLeftMM * pxPerMm;
 
-  const effectiveMaxWidthPx = (maxWidth ?? paperWidthPx) * pxPerMm;
+  const effectiveMaxWidthPx = (maxWidth ?? paperWidthMm) * pxPerMm;
   const maxContentWidthPx = effectiveMaxWidthPx - (padLeft + padRight);
 
   const wrapText = (lines: string[], maxWidth: number, font: string): string[] => {
@@ -314,21 +314,21 @@ export function renderTextToCanvas(
 /**
  * Scale a canvas to a maximum width specified in millimeters.
  * @param canvas - The source canvas.
- * @param maxWidthMm - Maximum width in mm. If undefined, returns the canvas unchanged.
+ * @param maxWidthMm - Maximum width in mm. If undefined, falls back to paperWidthMm.
  * @param printerDPI - Printer DPI for conversion.
- * @param paperWidthPx - Paper width in pixels (fallback).
+ * @param paperWidthMm - Paper width in mm (fallback when maxWidthMm is not set).
  * @returns The original or a scaled canvas.
  */
 export function scaleCanvasByMaxWidth(
   canvas: HTMLCanvasElement,
   maxWidthMm: number | undefined,
   printerDPI: number,
-  paperWidthPx: number
+  paperWidthMm: number
 ): HTMLCanvasElement {
 
   const dpi = printerDPI;
   const pxPerMm = dpi / 25.4;
-  const effectiveMaxWidthPx = (maxWidthMm ?? paperWidthPx) * pxPerMm;
+  const effectiveMaxWidthPx = (maxWidthMm ?? paperWidthMm) * pxPerMm;
 
   if (canvas.width <= effectiveMaxWidthPx) {
     return canvas;
